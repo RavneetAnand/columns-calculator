@@ -1,4 +1,3 @@
-// AggregateForm.tsx
 import styled from 'styled-components';
 import { Checkbox, HTMLSelect } from '@blueprintjs/core';
 import { ActionButton } from '../SliderPanel/SliderPanel.styles';

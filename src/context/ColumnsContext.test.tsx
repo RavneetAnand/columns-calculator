@@ -56,7 +56,7 @@ describe('ColumnsContext', () => {
           payload: { columnId: 'var_col_2', aggregateFunctions: ['SUM'] },
         });
       }, [dispatch]);
-      console.log(columns);
+
       return (
         <div>
           {columns

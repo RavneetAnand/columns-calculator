@@ -10,7 +10,6 @@ export const applyAggregateFunctionToTimeColumn = (
 
   // For datetime operations, convert strings to Date objects
   const dateValues = data.map((row) => new Date(row[columnId] as string));
-  console.log(dateValues);
 
   switch (aggregateFunction) {
     // Existing cases for numeric and string aggregates...

@@ -1,15 +1,15 @@
 import { fireEvent, render } from '@testing-library/react';
-import { SliderPanelType } from './SliderPanel';
+import { SliderPanel } from './SliderPanel';
 import '@testing-library/jest-dom';
 import { act } from 'react-dom/test-utils';
 
 describe('SliderPanel', () => {
   it('should render without crashing', () => {
-    render(<SliderPanelType />);
+    render(<SliderPanel />);
   });
 
   it('should open and close the slider when the toggle button is clicked', () => {
-    const { getByTestId } = render(<SliderPanelType />);
+    const { getByTestId } = render(<SliderPanel />);
 
     const toggleButton = getByTestId('closeSliderButton');
 
@@ -27,7 +27,7 @@ describe('SliderPanel', () => {
   });
 
   it('should display the FormulaBuilder panel when the add column button is clicked', () => {
-    const { getByTestId } = render(<SliderPanelType />);
+    const { getByTestId } = render(<SliderPanel />);
 
     const addButton = getByTestId('addCalculatedColumnBtn');
 
@@ -39,7 +39,7 @@ describe('SliderPanel', () => {
   });
 
   it('should display the AggregateForm panel when the aggregate function button is clicked', () => {
-    const { getByTestId } = render(<SliderPanelType />);
+    const { getByTestId } = render(<SliderPanel />);
 
     const aggregateButton = getByTestId('manageAggregateFunctionsBtn');
 

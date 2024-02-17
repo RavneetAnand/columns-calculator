@@ -26,7 +26,6 @@ export const validateFormula = (
   columnNames.forEach((column) => {
     expression = expression.replace(column, '1');
   });
-  console.log(expression);
 
   // Check for balanced parentheses
   const parenthesesBalance = expression.split('').reduce((balance, char) => {
@@ -55,7 +54,6 @@ export const validateFormula = (
   const allOperandsValid = operands.every(
     (operand) => !isNaN(parseFloat(operand)),
   );
-  console.log({ operands, allOperandsValid });
 
   if (!allOperandsValid) {
     return {
