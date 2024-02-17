@@ -3,7 +3,7 @@ import { Table2 } from '@blueprintjs/table';
 import { Button, Menu } from '@blueprintjs/core';
 
 // This wrapper component is necessary to make Table2 compatible with styled-components.
-const Table2Wrapper = ({ ...props }: any) => {
+const Table2Wrapper = ({ ...props }) => {
   return <Table2 {...props} />;
 };
 

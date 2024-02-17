@@ -44,7 +44,7 @@ const updateColumnAggregateFunction = (
 
 const reducer = (
   state: ColumnsContextType,
-  action: { type: any; payload: any },
+  action: { type: string; payload: any },
 ) => {
   let newState = { ...state };
   switch (action.type) {

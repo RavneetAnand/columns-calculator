@@ -14,7 +14,10 @@ type FormulaExpressionProps = {
   expression: string;
   setFormula: (expression: string) => void;
   formulaValidation: { isValid: boolean; message: string };
-  setFormulaValidation: (formulaValidation: any) => void;
+  setFormulaValidation: (formulaValidation: {
+    isValid: boolean;
+    message: string;
+  }) => void;
 };
 
 export const FormulaExpression: React.FC<FormulaExpressionProps> = ({

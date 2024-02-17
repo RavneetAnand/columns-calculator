@@ -1,4 +1,4 @@
-export default ({
+export default {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
     '^.+\\.js$': 'babel-jest',
@@ -7,4 +7,4 @@ export default ({
     '\\.(css|less)$': 'identity-obj-proxy',
   },
   testEnvironment: 'jsdom',
-});
+};

@@ -28,9 +28,9 @@ export const OpviaTable: FC = () => {
   const { columns: allColumns, dispatch } = useContext(ColumnsContext);
   const previousColumnLength = usePrevious(allColumns.length) || 0;
 
-  const [formattedData, setFormattedData] = useState<{ [key: string]: any }[]>(
-    [],
-  );
+  const [formattedData, setFormattedData] = useState<
+    { [key: string]: string }[]
+  >([]);
   const [sortedIndexMap, setSortedIndexMap] = useState<number[]>([]);
   const [aggregateFuncResult, setAggregateFuncResult] = useState<string>('');
 
