@@ -1,16 +1,17 @@
 import React from 'react';
 import './App.css';
-import { Slider } from './components/Slider/Slider';
+import { SliderPanel } from './components/SliderPanel/SliderPanel';
 import { ColumnsProvider } from './context/ColumnsContext';
 import { FocusStyleManager } from '@blueprintjs/core';
 import { OpviaTable } from './components/OpviaTable/OpviaTable';
 
 const App: React.FC = () => {
   FocusStyleManager.onlyShowFocusOnTabs();
+
   return (
     <div className="App">
       <ColumnsProvider>
-        <Slider />
+        <SliderPanel />
         <div className="table-container">
           <OpviaTable />
         </div>

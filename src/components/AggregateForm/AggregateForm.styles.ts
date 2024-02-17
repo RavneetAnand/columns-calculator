@@ -1,7 +1,7 @@
 // AggregateForm.tsx
 import styled from 'styled-components';
 import { Checkbox, HTMLSelect } from '@blueprintjs/core';
-import { ActionButton } from '../Slider/Slider.styles';
+import { ActionButton } from '../SliderPanel/SliderPanel.styles';
 
 export const FormContainer = styled.div`
   /* Align the content to left */

@@ -5,38 +5,38 @@ import {
   ChevronCloseButton,
   SliderHeader,
   Title,
-} from './Slider.styles';
+} from './SliderPanel.styles';
 import { ToolbarPanel } from './ToolbarPanel';
 import AggregateForm from '../AggregateForm/AggregateForm';
 
-export enum SliderPanel {
+export enum SliderPanelType {
   ADD_COLUMN = 'add_column',
   AGGREGATE_FUNCTION = 'aggregate_function',
 }
 
-export const Slider: React.FC = () => {
+export const SliderPanel: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activePanel, setActivePanel] = useState<SliderPanel>(
-    SliderPanel.ADD_COLUMN,
+  const [activePanel, setActivePanel] = useState<SliderPanelType>(
+    SliderPanelType.ADD_COLUMN,
   );
 
   const toggleSlider = () => setIsOpen(!isOpen);
 
-  const handleSliderPanel = (panel: SliderPanel) => {
+  const handleSliderPanel = (panel: SliderPanelType) => {
     switch (panel) {
-      case SliderPanel.ADD_COLUMN:
-        setActivePanel(SliderPanel.ADD_COLUMN);
+      case SliderPanelType.ADD_COLUMN:
+        setActivePanel(SliderPanelType.ADD_COLUMN);
         break;
-      case SliderPanel.AGGREGATE_FUNCTION:
-        setActivePanel(SliderPanel.AGGREGATE_FUNCTION);
+      case SliderPanelType.AGGREGATE_FUNCTION:
+        setActivePanel(SliderPanelType.AGGREGATE_FUNCTION);
         break;
       default:
-        setActivePanel(SliderPanel.ADD_COLUMN);
+        setActivePanel(SliderPanelType.ADD_COLUMN);
     }
   };
 
   const panelHeaderTitle =
-    activePanel === SliderPanel.ADD_COLUMN
+    activePanel === SliderPanelType.ADD_COLUMN
       ? 'Add Calculated Column'
       : 'Choose Aggregate Functions';
 
@@ -46,15 +46,16 @@ export const Slider: React.FC = () => {
         toggleSlider={toggleSlider}
         handleSliderPanel={handleSliderPanel}
       />
-      <SliderContainer $isOpen={isOpen}>
+      <SliderContainer $isOpen={isOpen} data-testid="sliderContainer">
         <ChevronCloseButton
           onClick={toggleSlider}
+          data-testid="closeSliderButton"
           icon={'double-chevron-left'}
         />
         <SliderHeader>
           <Title>{panelHeaderTitle}</Title>
         </SliderHeader>
-        {activePanel === SliderPanel.ADD_COLUMN ? (
+        {activePanel === SliderPanelType.ADD_COLUMN ? (
           <FormulaBuilder toggleSlider={toggleSlider} />
         ) : (
           <AggregateForm />

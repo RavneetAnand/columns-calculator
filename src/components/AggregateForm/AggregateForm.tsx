@@ -75,7 +75,7 @@ const AggregateForm = () => {
   };
 
   return (
-    <FormContainer>
+    <FormContainer data-testid="aggregateFormPanel">
       <h3>Choose a column name:</h3>
       <StyledHTMLSelect
         id="column-select"

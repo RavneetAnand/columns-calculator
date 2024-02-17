@@ -1,14 +1,14 @@
-import { SliderPanel } from './Slider';
-import { ToolbarButton, ToolbarContainer } from './Slider.styles';
+import { SliderPanelType } from './SliderPanel';
+import { ToolbarButton, ToolbarContainer } from './SliderPanel.styles';
 import { Icon, Tooltip } from '@blueprintjs/core';
 
 type Props = {
   toggleSlider: () => void;
-  handleSliderPanel: (panel: SliderPanel) => void;
+  handleSliderPanel: (panel: SliderPanelType) => void;
 };
 
 export const ToolbarPanel = ({ toggleSlider, handleSliderPanel }: Props) => {
-  const handleButtonClick = (panel: SliderPanel) => {
+  const handleButtonClick = (panel: SliderPanelType) => {
     handleSliderPanel(panel);
     toggleSlider();
   };
@@ -22,7 +22,8 @@ export const ToolbarPanel = ({ toggleSlider, handleSliderPanel }: Props) => {
             placement="right"
           >
             <ToolbarButton
-              onClick={() => handleButtonClick(SliderPanel.ADD_COLUMN)}
+              onClick={() => handleButtonClick(SliderPanelType.ADD_COLUMN)}
+              data-testid="addCalculatedColumnBtn"
             >
               <Icon icon="add-column-right" size={20} />
             </ToolbarButton>
@@ -34,7 +35,10 @@ export const ToolbarPanel = ({ toggleSlider, handleSliderPanel }: Props) => {
             placement="right"
           >
             <ToolbarButton
-              onClick={() => handleButtonClick(SliderPanel.AGGREGATE_FUNCTION)}
+              data-testid="manageAggregateFunctionsBtn"
+              onClick={() =>
+                handleButtonClick(SliderPanelType.AGGREGATE_FUNCTION)
+              }
             >
               <Icon icon="function" size={20} />
             </ToolbarButton>

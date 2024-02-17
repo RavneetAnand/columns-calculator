@@ -8,11 +8,11 @@ import { InputField } from './InputField';
 import { Operators } from './Operators';
 import { FormulaExpression } from './FormulaExpression';
 import { TableColumns } from './TableColumns';
-import { validateFormula } from '../../utils/formulaValidator';
 import { emptyColumnNameMessage } from '../../utils/messages';
 import { ColumnsContext, SET_COLUMNS } from '../../context/ColumnsContext';
-import { ActionButton } from '../Slider/Slider.styles';
+import { ActionButton } from '../SliderPanel/SliderPanel.styles';
 import { defaultAggregateFunctions } from '../../utils/constants';
+import { validateFormula } from './formulaValidator';
 
 type FormulaBuilderProps = {
   toggleSlider: () => void;

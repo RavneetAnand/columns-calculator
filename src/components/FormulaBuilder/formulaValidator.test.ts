@@ -1,12 +1,12 @@
-import { validateFormula } from './formulaValidator';
 import {
-  emptyFormulaMessage,
   balancedParenthesesMessage,
-  invalidOperandsMessage,
   consecutiveOperatorsMessage,
+  emptyFormulaMessage,
   endsWithOperatorMessage,
+  invalidOperandsMessage,
   validFormulaMessage,
-} from './messages';
+} from '../../utils/messages';
+import { validateFormula } from './formulaValidator';
 
 describe('validateFormula', () => {
   it('should return false for empty formula', () => {

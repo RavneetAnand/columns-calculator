@@ -1,12 +1,12 @@
-import { arithmeticOperators } from '../components/FormulaBuilder/Operators';
+import { arithmeticOperators } from '../../utils/constants';
 import {
+  emptyFormulaMessage,
   balancedParenthesesMessage,
   invalidOperandsMessage,
   consecutiveOperatorsMessage,
-  emptyFormulaMessage,
   endsWithOperatorMessage,
   validFormulaMessage,
-} from './messages';
+} from '../../utils/messages';
 
 type ValidationResult = {
   isValid: boolean;
@@ -65,7 +65,7 @@ export const validateFormula = (
   }
 
   const operatorsToCheck = arithmeticOperators.filter(
-    (operator) => operator !== '(' && operator !== ')',
+    (operator: string) => operator !== '(' && operator !== ')',
   );
 
   // Check for consecutive operators (not including parentheses)
