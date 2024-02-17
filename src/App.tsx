@@ -3,7 +3,7 @@ import './App.css';
 import { Slider } from './components/Slider/Slider';
 import { ColumnsProvider } from './context/ColumnsContext';
 import { FocusStyleManager } from '@blueprintjs/core';
-import { OpviaTable } from './OpviaTable/OpviaTable';
+import { OpviaTable } from './components/OpviaTable/OpviaTable';
 
 const App: React.FC = () => {
   FocusStyleManager.onlyShowFocusOnTabs();
