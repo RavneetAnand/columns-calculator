@@ -24,7 +24,7 @@ export const FormulaExpression: React.FC<FormulaExpressionProps> = ({
   setFormulaValidation,
 }) => {
   return (
-    <SubContainer>
+    <SubContainer data-testid="formulaExpression">
       <h3>Formula Expression</h3>
       <FormulaContainer>
         <div>{expression}</div>

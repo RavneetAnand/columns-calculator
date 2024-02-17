@@ -16,7 +16,9 @@ export const InputField: React.FC<InputFieldProps> = ({
     <InputContainer
       type="text"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        onChange(e.target.value)
+      }
       placeholder={placeholder}
     />
   );

@@ -91,10 +91,11 @@ export const FormulaBuilder = ({ toggleSlider }: FormulaBuilderProps) => {
     formValidation.message === emptyColumnNameMessage;
 
   return (
-    <FormulaBuilderContainer>
+    <FormulaBuilderContainer data-testid="formulaBuilderPanel">
       <TopContainer>
         <h3>Column name</h3>
         <ActionButton
+          data-testid="addColumnButton"
           onClick={addCalculatedColumn}
           disabled={!formValidation.isValid || !isColumnNameValid}
         >
@@ -107,7 +108,10 @@ export const FormulaBuilder = ({ toggleSlider }: FormulaBuilderProps) => {
         placeholder="Enter column name"
       />
       {showEmptyColumnNameMessage && (
-        <SyntaxValidationText $isValid={false}>
+        <SyntaxValidationText
+          $isValid={false}
+          data-testid="syntaxValidationText"
+        >
           {formValidation.message}
         </SyntaxValidationText>
       )}

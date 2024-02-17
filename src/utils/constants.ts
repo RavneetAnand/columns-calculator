@@ -9,6 +9,20 @@ export const aggregateFunctions = [
   'MEDIAN',
 ];
 
+export const arithmeticOperators = [
+  '+',
+  '-',
+  '*',
+  '÷',
+  '%',
+  '<',
+  '>',
+  '≤',
+  '≥',
+  '(',
+  ')',
+];
+
 export type AggregateFunctionType = (typeof aggregateFunctions)[number];
 
 export const defaultAggregateFunctions = ['COUNT', 'SUM', 'AVG', 'MAX', 'MIN'];

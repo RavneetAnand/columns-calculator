@@ -1,5 +1,6 @@
 import React from 'react';
 import { SubContainer, OperatorButton } from './FormulaBuilder.styles';
+import { arithmeticOperators } from '../../utils/constants';
 
 type OperatorsProps = {
   addToFormula: (
@@ -7,20 +8,6 @@ type OperatorsProps = {
     addSpace?: boolean,
   ) => void;
 };
-
-export const arithmeticOperators = [
-  '+',
-  '-',
-  '*',
-  '÷',
-  '%',
-  '<',
-  '>',
-  '≤',
-  '≥',
-  '(',
-  ')',
-];
 
 export const Operators: React.FC<OperatorsProps> = ({ addToFormula }) => {
   const numbers = Array(10)
