@@ -3,7 +3,7 @@ import { evaluate } from 'mathjs';
 import { showToast } from './toast';
 import { formulaEvaluationErrorMessage } from './messages';
 
-function formatDateTime(isoString: string): string {
+export function formatDateTime(isoString: string): string {
   const date = new Date(isoString);
   return new Intl.DateTimeFormat('en-UK', {
     year: '2-digit',
@@ -23,7 +23,8 @@ export const convertDataFormat = (
   },
   columns: ColumnsType[],
 ): [] => {
-  // Convert data into a json object with the format {time_col: '2021-01-01T20:00:00Z', var_col_1: 0, var_col_2: 0}
+  // Convert data into a json object in format, e.g.,
+  // {time_col: '2021-01-01T20:00:00Z', var_col_1: 0, var_col_2: 0}
   const formattedData: any = [];
   for (const key in dummyTableData) {
     const [columnIndex, rowIndex] = key.split('-');
@@ -32,11 +33,8 @@ export const convertDataFormat = (
       formattedData[rowIndex] = {};
     }
 
-    const { columnId, columnType } = columns[Number(columnIndex)];
-    formattedData[rowIndex][columnId] =
-      columnType !== 'time'
-        ? dummyTableData[key]
-        : formatDateTime(dummyTableData[key] as string);
+    const { columnId } = columns[Number(columnIndex)];
+    formattedData[rowIndex][columnId] = dummyTableData[key] as string;
 
     formattedData[rowIndex]['id'] = rowIndex;
   }

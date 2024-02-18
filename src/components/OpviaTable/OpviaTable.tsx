@@ -15,6 +15,7 @@ import {
   convertDataFormat,
   addCalculatedField,
   times,
+  formatDateTime,
 } from '../../utils/formatData';
 import { AggregateFunctionType, columns } from '../../utils/constants';
 import { showToast } from '../../utils/toast';
@@ -174,8 +175,13 @@ export const OpviaTable: FC = () => {
   };
 
   const cellRenderer = (rowIndex: number, columnIndex: number) => {
-    const colId = allColumns[columnIndex].columnId;
-    const value = formattedData[rowIndex][colId];
+    const { columnId, columnType } = allColumns[columnIndex];
+    const value = formattedData[rowIndex][columnId];
+
+    if (columnType === 'time') {
+      return <Cell>{formatDateTime(String(value))}</Cell>;
+    }
+
     return <Cell>{String(value)}</Cell>;
   };
 
