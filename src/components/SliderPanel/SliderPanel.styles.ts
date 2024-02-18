@@ -29,7 +29,7 @@ export const ToolbarContainer = styled.div`
   flex-direction: column;
 
   border: 1px solid black;
-  border-radius: 15%;
+  border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 `;
 
@@ -54,7 +54,7 @@ export const ToolbarButton = styled(Button)`
   /* Background should have light gray border */
   border: 1px solid rgb(17 20 24 / 39%);
   border-radius: 50%;
-  margin: 8px;
+  margin: 8px 0px;
 
   .bp5-icon {
     color: #2dd3bf;
