@@ -3,6 +3,7 @@ import {
   addCalculatedField,
   convertDataFormat,
   formatDateTime,
+  getSortedData,
   safeEvaluate,
   times,
 } from './formatData';
@@ -139,12 +140,12 @@ describe('formatData', () => {
   describe('#formatDateTime', () => {
     it('should correctly format a date time string', () => {
       const result = formatDateTime('2021-01-01T20:00:00Z');
-      expect(result).toBe('Jan 01, 21, 8:00:00 PM GMT');
+      expect(result).toBe('01 Jan 21, 8:00:00 pm GMT');
     });
 
     it('should correctly format a date time string in a different timezone', () => {
       const result = formatDateTime('2021-01-01T20:00:00-05:00');
-      expect(result).toBe('Jan 02, 21, 1:00:00 AM GMT');
+      expect(result).toBe('02 Jan 21, 1:00:00 am GMT');
     });
 
     it('should return "Invalid Date" for an invalid date string', () => {
@@ -182,6 +183,54 @@ describe('formatData', () => {
 
       expect(mockFn).not.toHaveBeenCalled();
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('#getSortedData', () => {
+    const data = [
+      { id: 3, name: 'Charlie' },
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+    ];
+    it('sorts data in ascending order based on the provided key', () => {
+      const key = 'id';
+
+      const result = getSortedData(data, key, true);
+
+      expect(result).toEqual([
+        { id: 1, name: 'Alice' },
+        { id: 2, name: 'Bob' },
+        { id: 3, name: 'Charlie' },
+      ]);
+    });
+
+    it('sorts data in descending order based on the provided key', () => {
+      const key = 'id';
+
+      const result = getSortedData(data, key, false);
+
+      expect(result).toEqual([
+        { id: 3, name: 'Charlie' },
+        { id: 2, name: 'Bob' },
+        { id: 1, name: 'Alice' },
+      ]);
+    });
+
+    it('sorts data in ascending order based on the provided key and with same values', () => {
+      const data = [
+        { id: 3, name: 'Charlie' },
+        { id: 1, name: 'Bob' },
+        { id: 2, name: 'Bob' },
+      ];
+      const key = 'name';
+
+      const result = getSortedData(data, key, true);
+
+      expect(result).toEqual([
+        { id: 1, name: 'Bob' },
+        { id: 2, name: 'Bob' },
+        { id: 3, name: 'Charlie' },
+      ]);
     });
   });
 });

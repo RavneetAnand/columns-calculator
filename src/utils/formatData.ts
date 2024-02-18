@@ -118,3 +118,19 @@ export function times<T>(n: number, callback: (i: number) => T): T[] {
   }
   return result;
 }
+
+export const getSortedData = (
+  data: { [key: string]: any }[],
+  columnId: string,
+  ascendingOrder: boolean,
+): { [key: string]: any }[] => {
+  return [...data].sort((a, b) => {
+    if (a[columnId] < b[columnId]) {
+      return ascendingOrder ? -1 : 1;
+    }
+    if (a[columnId] > b[columnId]) {
+      return ascendingOrder ? 1 : -1;
+    }
+    return 0;
+  });
+};
