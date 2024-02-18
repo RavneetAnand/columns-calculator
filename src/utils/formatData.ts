@@ -63,8 +63,8 @@ export const safeEvaluate = (
     });
 
     result = evaluate(preparedExpression);
-  } catch (e) {
-    console.error(e);
+  } catch (e: any) {
+    console.error('Cannot evaluate the formula', e.message);
     showToast(formulaEvaluationErrorMessage, 'danger');
     return 'Error';
   }
