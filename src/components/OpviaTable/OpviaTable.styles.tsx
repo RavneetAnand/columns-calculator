@@ -15,7 +15,7 @@ export const TableContainer = styled.div`
 
   width: max-content;
   max-width: calc(100% - 100px);
-  height: 95vh;
+  height: 100vh;
   padding: 15px;
 
   background-color: #ffffff;
@@ -110,12 +110,13 @@ export const StyledMenu = styled(Menu)`
 `;
 
 export const BinButton = styled(Button)`
-  background-color: #2dd3bf !important;
+  background-color: #eee !important;
   border: none !important;
   box-shadow: none !important;
+  margin: 8px;
 
   .bp5-icon {
-    color: red;
+    color: gray;
   }
 `;
 
