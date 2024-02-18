@@ -56,6 +56,17 @@ describe('AggregateForm', () => {
     expect(checkbox).toBeChecked();
   });
 
+  it('should update selected functions when a function is checked again', () => {
+    const screen = renderComponent();
+
+    const checkbox = screen.getByLabelText('SUM');
+    fireEvent.click(checkbox);
+
+    fireEvent.click(checkbox);
+
+    expect(checkbox).not.toBeChecked();
+  });
+
   it('should clear selected column and functions when clear button is clicked', () => {
     const screen = renderComponent();
 
@@ -91,5 +102,15 @@ describe('AggregateForm', () => {
         aggregateFunctions: ['SUM'],
       },
     });
+  });
+
+  it("should display items as disabled if they're not valid for time type", () => {
+    const screen = renderComponent();
+
+    const select = screen.getByTestId('columnSelect');
+    fireEvent.change(select, { target: { value: 'column2' } });
+
+    const checkbox = screen.getByLabelText('AVG');
+    expect(checkbox).toBeDisabled();
   });
 });
