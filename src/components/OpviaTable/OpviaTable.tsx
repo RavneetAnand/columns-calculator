@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { Cell, Column, ColumnHeaderCell2 } from '@blueprintjs/table';
 import {
   BinButton,
@@ -35,22 +35,32 @@ export const OpviaTable: FC = () => {
   const [sortedIndexMap, setSortedIndexMap] = useState<number[]>([]);
   const [aggregateFuncResult, setAggregateFuncResult] = useState<string>('');
 
-  useEffect(() => {
-    const data = convertDataFormat(dummyTableData, columns);
+  // Add the calculated columns to the table
+  const memoizedAddCalculatedField = useMemo(() => addCalculatedField, []);
 
-    // Add the calculated columns to the table
-    addCalculatedField(data, allColumns);
+  const data = useMemo(
+    () => convertDataFormat(dummyTableData, columns),
+    [dummyTableData, columns],
+  );
+
+  useEffect(() => {
+    memoizedAddCalculatedField(data, allColumns);
     setFormattedData(data);
   }, []);
 
+  // Update the table when the column is added or removed
   useEffect(() => {
     const countColumnsChanged = allColumns.length - previousColumnLength;
     if (Math.abs(countColumnsChanged) !== 1) {
       return;
     }
 
-    const updatedData = addCalculatedField([...formattedData], allColumns);
+    const updatedData = memoizedAddCalculatedField(
+      [...formattedData],
+      allColumns,
+    );
 
+    // When a new column is added, the length of the columns will be increased by 1
     if (countColumnsChanged > 0) {
       if (!updatedData) {
         // Delete the column added
@@ -61,26 +71,29 @@ export const OpviaTable: FC = () => {
       }
     }
 
-    // Add the calculated columns to the table
     setFormattedData(updatedData || formattedData);
   }, [allColumns.length]);
 
-  const sortDataByColumn = (columnId: string, ascendingOrder = true) => {
-    const indexMap = times(formattedData.length, (i: number) => i);
+  const sortDataByColumn = useMemo(
+    () =>
+      (columnId: string, ascendingOrder = true) => {
+        const indexMap = times(formattedData.length, (i: number) => i);
 
-    const sortedData = [...formattedData].sort((a, b) => {
-      if (a[columnId] < b[columnId]) {
-        return ascendingOrder ? -1 : 1;
-      }
-      if (a[columnId] > b[columnId]) {
-        return ascendingOrder ? 1 : -1;
-      }
-      return 0;
-    });
+        const sortedData = [...formattedData].sort((a, b) => {
+          if (a[columnId] < b[columnId]) {
+            return ascendingOrder ? -1 : 1;
+          }
+          if (a[columnId] > b[columnId]) {
+            return ascendingOrder ? 1 : -1;
+          }
+          return 0;
+        });
 
-    setSortedIndexMap(indexMap);
-    setFormattedData(sortedData); // Update the state with the sorted data
-  };
+        setSortedIndexMap(indexMap);
+        setFormattedData(sortedData); // Update the state with the sorted data
+      },
+    [formattedData],
+  );
 
   const deleteCalculatedColumn = (columnId: string) => {
     const remainingColumns = allColumns.filter(
@@ -205,12 +218,14 @@ export const OpviaTable: FC = () => {
           {cols}
         </StyledTable2>
 
-        <ResultContainer>
-          {`Aggregate function calculation: ${aggregateFuncResult}`}
-          <ClearButton onClick={() => setAggregateFuncResult('')}>
-            x
-          </ClearButton>
-        </ResultContainer>
+        {aggregateFuncResult && (
+          <ResultContainer>
+            {`Aggregate function calculation: ${aggregateFuncResult}`}
+            <ClearButton onClick={() => setAggregateFuncResult('')}>
+              x
+            </ClearButton>
+          </ResultContainer>
+        )}
       </TableContainer>
     </>
   );
