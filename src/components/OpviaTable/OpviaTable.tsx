@@ -36,15 +36,11 @@ export const OpviaTable: FC = () => {
   const [aggregateFuncResult, setAggregateFuncResult] = useState<string>('');
 
   // Add the calculated columns to the table
-  const memoizedAddCalculatedField = useMemo(() => addCalculatedField, []);
-
-  const data = useMemo(
-    () => convertDataFormat(dummyTableData, columns),
-    [dummyTableData, columns],
-  );
-
   useEffect(() => {
-    memoizedAddCalculatedField(data, allColumns);
+    const data = convertDataFormat(dummyTableData, columns);
+
+    // Add the calculated columns to the table
+    addCalculatedField(data, allColumns);
     setFormattedData(data);
   }, []);
 
@@ -55,10 +51,7 @@ export const OpviaTable: FC = () => {
       return;
     }
 
-    const updatedData = memoizedAddCalculatedField(
-      [...formattedData],
-      allColumns,
-    );
+    const updatedData = addCalculatedField([...formattedData], allColumns);
 
     // When a new column is added, the length of the columns will be increased by 1
     if (countColumnsChanged > 0) {
@@ -74,26 +67,14 @@ export const OpviaTable: FC = () => {
     setFormattedData(updatedData || formattedData);
   }, [allColumns.length]);
 
-  const sortDataByColumn = useMemo(
-    () =>
-      (columnId: string, ascendingOrder = true) => {
-        const indexMap = times(formattedData.length, (i: number) => i);
+  const sortDataByColumn = (columnId: string, ascendingOrder = true) => {
+    const indexMap = times(formattedData.length, (i: number) => i);
 
-        const sortedData = [...formattedData].sort((a, b) => {
-          if (a[columnId] < b[columnId]) {
-            return ascendingOrder ? -1 : 1;
-          }
-          if (a[columnId] > b[columnId]) {
-            return ascendingOrder ? 1 : -1;
-          }
-          return 0;
-        });
+    const sortedData = getSortedData(formattedData, columnId, ascendingOrder);
 
-        setSortedIndexMap(indexMap);
-        setFormattedData(sortedData); // Update the state with the sorted data
-      },
-    [formattedData],
-  );
+    setSortedIndexMap(indexMap);
+    setFormattedData(sortedData); // Update the state with the sorted data
+  };
 
   const deleteCalculatedColumn = (columnId: string) => {
     const remainingColumns = allColumns.filter(
