@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Cell, Column, ColumnHeaderCell2 } from '@blueprintjs/table';
 import {
   BinButton,
@@ -16,6 +16,7 @@ import {
   addCalculatedField,
   times,
   formatDateTime,
+  getSortedData,
 } from '../../utils/formatData';
 import { AggregateFunctionType, columns } from '../../utils/constants';
 import { showToast } from '../../utils/toast';
@@ -160,6 +161,7 @@ export const OpviaTable: FC = () => {
       >
         {formula && (
           <BinButton
+            data-testid={`deleteCalculatedColumn-${columnId}`}
             icon="trash"
             onClick={() => deleteCalculatedColumn(columnId)}
           />
