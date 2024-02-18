@@ -13,6 +13,7 @@ import { ColumnsContext, SET_COLUMNS } from '../../context/ColumnsContext';
 import { ActionButton } from '../SliderPanel/SliderPanel.styles';
 import { defaultAggregateFunctions } from '../../utils/constants';
 import { validateFormula } from './formulaValidator';
+import { expression } from 'mathjs';
 
 type FormulaBuilderProps = {
   toggleSlider: () => void;

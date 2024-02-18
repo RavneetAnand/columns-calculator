@@ -30,9 +30,10 @@ export const FormulaExpression: React.FC<FormulaExpressionProps> = ({
     <SubContainer data-testid="formulaExpression">
       <h3>Formula Expression</h3>
       <FormulaContainer>
-        <div>{expression}</div>
+        <div data-testid="formulaField">{expression}</div>
         {!!expression.trim() && (
           <ClearFormulaButton
+            data-testid="clearFormulaButton"
             onClick={() => {
               setFormula('');
               setFormulaValidation({

@@ -79,6 +79,7 @@ const AggregateForm = () => {
       <h3>Choose a column name:</h3>
       <StyledHTMLSelect
         id="column-select"
+        data-testid="columnSelect"
         onChange={handleColumnChange}
         defaultValue={'placeholder'}
       >

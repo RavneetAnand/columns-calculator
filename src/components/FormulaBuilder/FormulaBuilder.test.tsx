@@ -36,10 +36,23 @@ describe('FormulaBuilder', () => {
   it('should update the column name when the input field is changed', () => {
     const screen = renderComponent();
 
-    const inputField = screen.getByPlaceholderText('Enter column name');
+    const inputField = screen.getByTestId('columnNameInput');
     fireEvent.change(inputField, { target: { value: 'new column' } });
 
     expect((inputField as HTMLInputElement).value).toBe('new column');
+  });
+
+  it('should clear the formula when the clear button is clicked', () => {
+    const screen = renderComponent();
+
+    const tableColumn = screen.getByText('column1');
+    fireEvent.click(tableColumn);
+
+    const clearButton = screen.getByTestId('clearFormulaButton');
+    fireEvent.click(clearButton);
+
+    const formula = screen.getByTestId('formulaField');
+    expect(formula.textContent).toBe('');
   });
 
   it('should update the formula when a table column is clicked', () => {

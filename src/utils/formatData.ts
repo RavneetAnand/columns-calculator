@@ -5,6 +5,11 @@ import { formulaEvaluationErrorMessage } from './messages';
 
 export function formatDateTime(isoString: string): string {
   const date = new Date(isoString);
+
+  if (date.toString() === 'Invalid Date') {
+    return date.toString();
+  }
+
   return new Intl.DateTimeFormat('en-UK', {
     year: '2-digit',
     month: 'short',
@@ -87,7 +92,7 @@ export const addCalculatedField = (
       if (formula) {
         const value = safeEvaluate(formula, item, allColumns).toString();
 
-        // If the result is an error, display a toast message and remove the column
+        // If the result is an error, display a toast message
         if (value === 'Error') {
           breakFlag = true;
           break;

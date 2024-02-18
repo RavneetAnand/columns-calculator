@@ -14,6 +14,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <InputContainer
+      data-testid="columnNameInput"
       type="text"
       value={value}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
