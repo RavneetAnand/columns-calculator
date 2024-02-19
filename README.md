@@ -108,4 +108,4 @@ Further, this `Rate of change` can either be represented in a tabular-form or in
 
 ## Authors
 
-* **Ravneet Singh Anand** - *Initial work* - [RavneetAnand](https://github.com/RavneetAnand)
+* **Ravneet Singh Anand** - [RavneetAnand](https://github.com/RavneetAnand)
