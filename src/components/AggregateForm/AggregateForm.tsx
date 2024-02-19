@@ -60,7 +60,6 @@ const AggregateForm = () => {
   };
 
   const clear = () => {
-    setSelectedColumn('');
     setSelectedFunctions([]);
   };
 

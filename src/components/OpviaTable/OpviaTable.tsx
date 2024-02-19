@@ -88,7 +88,7 @@ export const OpviaTable: FC = () => {
   const renderAggregateFunctionsPopover = (columnId: string) => {
     // Get column's aggregate list by column identifier
     const col = allColumns.find((col) => col.columnId === columnId);
-    if (!col) {
+    if (!col || !col.aggregateFunctions.length) {
       return;
     }
 
